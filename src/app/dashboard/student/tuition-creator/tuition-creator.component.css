@@ -1,0 +1,16 @@
+button.btn.btn-normal.daysBtn{
+    width: 100%;
+    margin: 5px;
+}
+
+button.btn.btn-success.search {
+    margin: 10px 5px 10px 5px;
+}
+
+button.btn.btn-primary.sel {
+    margin: 10px 5px 10px 5px;
+}
+
+button.btn.btn-success.days {
+    margin: 30px 20px 30px 20px;
+}

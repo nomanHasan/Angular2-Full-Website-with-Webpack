@@ -1,0 +1,37 @@
+<template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <h4 class="modal-title">Modal title</h4>
+  </div>
+  <div class="modal-body">
+    <p> Applied to Tuition at <strong>{{offer}} Tk</strong> </p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
+  </div>
+</template>
+
+<div class="tuition-space" *ngIf="tuition">
+  <div class="tuition-info col-md-8">
+    <h3><label for="">Institution: </label> {{tuition.institution}}</h3>
+    <h4><label for="">Medium: </label> {{tuition.info.medium}}</h4>
+    <h5><label for="">Level: </label> {{tuition.info.level}}</h5>
+    <h5><label for="">Subjects: </label> {{tuition.subjects}}</h5>
+    <h5><label for="">Days: </label> {{tuition.days}}</h5>
+    <h5><label for="">Thana: </label> {{tuition.thana}}</h5>
+    <h5><label for="">Zone: </label> {{tuition.zone}}</h5>
+  </div>
+
+  <div class="col-md-8">
+    <div class="col-md-8">
+      <input id="apply" name="apply" type="number" #apply placeholder="Apply" class="form-control input-md">
+      <span class="help-block"> Enter your desired Salary </span>
+    </div>
+
+    <div class="col-md-8">
+      <button class="btn btn-success" (click)="onSubmit(apply.value, content)">Apply</button>
+    </div>
+  </div>
+</div>

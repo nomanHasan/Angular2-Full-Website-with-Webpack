@@ -1,0 +1,26 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-3 col-md-2 sidebar">
+      <ul class="nav nav-pills nav-stacked">
+        <li><a [routerLink] = "['index']">Index</a></li>
+        <li role="separator" class="divider"></li>
+        <li *ngIf="teacherFlag"><a [routerLink] = "['find-tuition']">Find Tuition</a></li>
+        <li role="separator" class="divider"></li>
+        <li *ngIf="teacherFlag"><a [routerLink] = "['applied-tuition']">Applied Tuition</a></li>
+        <li role="separator" class="divider"></li>
+        <li *ngIf="teacherFlag"><a [routerLink] = "['activated-tuition']">Activated Tuition</a></li>
+        <li role="separator" class="divider"></li>
+        <li *ngIf="studentFlag"><a [routerLink] = "['create-tuition']">Create Tuition</a></li>
+        <li role="separator" class="divider"></li>
+        <li *ngIf="studentFlag"><a [routerLink] = "['my-tuition']">My Tuitions</a></li>
+        <li role="separator" class="divider"></li>
+      </ul>
+    </div>
+    <div class="row">  
+      <div class="col-sm-9">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+    
+  </div>
+</div>

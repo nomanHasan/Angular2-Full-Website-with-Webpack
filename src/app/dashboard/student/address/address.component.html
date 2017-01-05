@@ -1,0 +1,74 @@
+<form class="form-horizontal">
+  <fieldset>
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="district">District</label>
+      <div class="col-md-8">
+        <input #name="ngModel" name="district" type="text" [(ngModel)]="user.location.district" readonly class="form-control input-md"
+          required="District Name is required ">
+        <span class="help-block">District Name</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="city">City</label>
+      <div class="col-md-8">
+        <input id="city" name="city" type="text" [(ngModel)]="user.location.city" readonly placeholder="City" class="form-control input-md">
+        <span class="help-block"> Enter City </span>
+      </div>
+
+    </div>
+
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="thana">Thana</label>
+      <div class="col-md-8">
+        <select id="thana" name="thana" type="text" [(ngModel)]="user.location.thana" class="form-control input-md">
+          <option *ngFor="let th of thanas" value="{{th}}">{{th}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="zone">Zone</label>
+      <div class="col-md-8">
+        <select id="zone" name="zone" type="text" [(ngModel)]="user.location.zone" placeholder="Zone" class="form-control input-md">
+          <option *ngFor="let zn of zones" value="{{zn}}">{{zn}}</option>
+        </select>
+        
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="address">Address</label>
+      <div class="col-md-8">
+        <input id="address" name="address" type="text" [(ngModel)]="user.location.address" placeholder="Address" class="form-control input-md">
+        <span class="help-block"> Enter Address </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="street">Street</label>
+        <div class="col-md-8">
+          <input id="street" name="street" type="text" [(ngModel)]="user.location.street" placeholder="Street" class="form-control input-md">
+          <span class="help-block"> Enter Street </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="house">House</label>
+        <div class="col-md-8">
+          <input id="house" name="house" type="text" [(ngModel)]="user.location.house" placeholder="House" class="form-control input-md">
+          <span class="help-block"> Enter House </span>
+        </div>
+      </div>
+
+      <!-- Button (Double) -->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="save"></label>
+        <div class="col-md-8">
+          <button id="save" [disabled]="!isFormValid().stat" name="save" (click)="onSubmit()" class="btn btn-success" type="submit">Update Address</button>
+        </div>
+      </div>
+
+  </fieldset>
+</form>

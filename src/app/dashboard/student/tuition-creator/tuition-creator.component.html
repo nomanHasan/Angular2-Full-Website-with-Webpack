@@ -1,0 +1,88 @@
+<div class="col-sm-6">
+  <div *ngIf="!IsLocationValid().stat">
+    <app-address></app-address>
+  </div>
+  <div *ngIf="IsLocationValid().stat">
+
+
+    <form>
+
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="institution">Institution</label>
+        <div class="col-md-8">
+          <input id="institution" name="institution" type="text" [(ngModel)]="tuition.institution" placeholder="Institution" class="form-control input-md">
+          <span class="help-block"> Enter Institution </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="medium">Medium</label>
+        <div class="col-md-8">
+          <select id="medium" #medium name="medium" type="text" (change)="mediumChange(medium.value)" [(ngModel)]="tuition.medium"
+            placeholder="Medium" class="form-control input-md">
+            <option *ngFor="let m of mediums" value="{{m}}">{{m}}</option>
+          </select>
+          <span class="help-block"> Enter Medium </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="level">Level</label>
+        <div class="col-md-8">
+          <select id="level" name="level" type="text" [(ngModel)]="tuition.level" placeholder="Level" class="form-control input-md">
+            <option *ngFor="let l of levels" value="{{l}}">{{l}}</option>
+          </select>
+          <span class="help-block"> Enter Level </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="subjects">Subjects</label>
+        <div class="col-md-8">
+          <input id="subjects" #subjects name="subjects" type="text" (keyup)="search(subjects.value)" placeholder="Subjects" class="form-control input-md">
+          <div>
+            <button *ngFor="let s of subs" class="btn btn-success search" (click)="AddSubject(s)">{{s}}</button>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="selectedList.length>0">
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="Selected Subjects">Selected Subjects</label>
+          <div class="col-md-8">
+            <button *ngFor="let s of selectedList" class="btn btn-primary sel" (click)="removeSubject(s)">{{s}}</button>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn btn-success days" style="width:100%" (click)="daySelectToggle()">Add Days</button>
+
+<div class="form-group" [hidden]="!daysSelectFlag">
+  <label class="col-md-4 control-label" for="days">Days</label>
+  <div class="col-md-8">
+    <div *ngFor="let d of daysList">
+      <button [class.btn-success]="isSelected(d)" class="btn btn-normal daysBtn" (click)="selectDay(d)" value="{{d}}"> {{d}} </button>
+    </div>
+  </div>
+</div>
+
+<div class="form-group" [hidden]="!selectedDays.length>0">
+  <label class="col-md-4 control-label" for="days">Selected Days</label>
+  <div class="col-md-8">
+    <span *ngFor="let d of selectedDays" class="label label-primary">
+          {{d}}
+      </span>
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="col-md-4 control-label" for="save"></label>
+  <div class="col-md-8">
+    <button id="save" [disabled]="!isFormValid()" name="save" (click)="onSubmit()" class="btn btn-success" type="submit">Create Tuition</button>
+  </div>
+</div>
+
+</form>
+
+</div>
+</div>

@@ -1,0 +1,18 @@
+<h2> Private Tuitions </h2>
+
+
+<div *ngFor="let t of tuitions" class="panel panel-default">
+    <a [routerLink]="[ '/dashboard/my-tuition-details', t._id ]" >
+        <div class="panel-body">
+            <h4 class="institution">{{t.institution}}</h4><br>
+            <div class="left">
+                <label for="medium">Medium: </label><span class="medium">{{t.info.medium}}</span><br>
+                <label for="level">Level: </label><span class="level">{{t.info.level}}</span><br>
+            </div>
+            <div class="right">
+                <label for="subjects">Subjects: </label><span class="subjects">{{t.subjects}}</span><br>
+                <label for="days">Days: </label><span class="days">{{t.days}}</span><br>
+            </div>
+        </div>
+    </a>
+</div>

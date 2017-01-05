@@ -1,0 +1,129 @@
+<div id="login-overlay" class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+      <h4 class="modal-title" id="myModalLabel">Register a Free Account </h4>
+    </div>
+    <div class="modal-body">
+      <form class="form-horizontal" *ngIf="IsRegistration" (ngSubmit)="onSubmit()" #registerForm="ngForm">
+        <fieldset>
+          <!-- Text input-->
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="name">Name</label>
+            <div class="col-md-8">
+              <input #name="ngModel" name="name" type="text" [(ngModel)]="user.name" placeholder="Your Name" class="form-control input-md"
+                required="Your Name is required ">
+              <span class="help-block">Your Name</span>
+                <span class="" *ngIf="!nameValidation().stat"> <ul><li style="color:red" *ngFor="let e of nameValidation().err">{{e}}</li></ul> </span>
+            </div>
+          </div>
+
+          <!-- Text input-->
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="phone">Phone</label>
+            <div class="col-md-8">
+              <input id="phone" #phone name="phone" type="text" (blur)="searchByContactNo(phone.value)" [(ngModel)]="user.contactNo" placeholder="Phone Number" class="form-control input-md"
+                required="Your Mobile no is verry impportant">
+              <span class="help-block">Your Phone</span>
+              <span *ngIf="!contactNoValidation().stat"> <ul><li style="color:red" *ngFor="let e of contactNoValidation().err ">{{e}}</li></ul> </span>
+              <span *ngIf="contactNoStatus && contactNoStatus.exists" style="color:red"> <strong>{{contactNoStatus.contactNo}}</strong> Already exists in our Database ! </span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="username">Username</label>
+            <div class="col-md-8">
+              <input id="username" #username name="username" (blur)="searchByUsername(username.value)" [(ngModel)]="user.username" name="username" type="text" placeholder="Username"
+                class="form-control input-md" required="Your Username is required ">
+              <span class="help-block">Your User Name</span>
+              <span *ngIf="!usernameValidation().stat"> <ul><li style="color:red" *ngFor="let e of usernameValidation().err">{{e}}</li></ul></span>
+              <span *ngIf="usernameStatus && usernameStatus.exists" style="color:red"><strong>{{usernameStatus.username}}</strong> Already Exists ! </span>
+            </div>
+          </div>
+
+          <div *ngIf="usernameStatus">
+            <label class="lbl lbl-danger">{{usernameStatus.username}} exists{{usernameStatus.exists}} </label>
+          </div>
+          <div *ngIf="user">
+            <label class="lbl lbl-danger">{{user.name}} {{user.username}}  {{user.contactNo}}  {{user.email}} {{user.password}} {{user.accountType}}</label>
+          </div>
+
+          <!-- Text input-->
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="email">Email</label>
+            <div class="col-md-8">
+              <input id="email" name="email" type="text" placeholder="Email address" [(ngModel)]="user.email" class="form-control input-md">
+              <span class="help-block">Email will be used for notication messages</span>
+              <span *ngIf="!emailValidation().stat"> <ul><li style="color:red" *ngFor="let e of emailValidation().err">{{e}}</li></ul></span>
+
+            </div>
+          </div>
+
+          <!-- Password input-->
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="password">Password </label>
+            <div class="col-md-8">
+              <input id="password" name="password" type="password" placeholder="Password" [(ngModel)]="user.password" class="form-control input-md"
+                required="">
+              <span class="help-block">Admin Password </span>
+              <span *ngIf="!passwordValidation().stat"><ul><li style="color:red" *ngFor="let e of passwordValidation().err">{{e}}</li></ul> </span>
+
+            </div>
+          </div>
+
+          <!-- Password input-->
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="rpassword">Confirm Password</label>
+            <div class="col-md-8">
+              <input id="rpassword" name="rpassword" type="password" [(ngModel)]="user.password" placeholder="Password" class="form-control input-md"
+                required="">
+              <span class="help-block">Retype pass word</span>
+            </div>
+          </div>
+
+          <!-- Account Type Input -->
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="accountType">Account Type </label>
+            <div class="col-md-8">
+              <select id="accountType" name="accountType" [(ngModel)]="user.accountType">
+                <option *ngFor="let at of accountTypes " value="{{at}}">{{at}}</option>
+              </select>
+              <span *ngIf="!accountTypeValidation().stat"> <ul><li style="color:red" *ngFor="let e of accountTypeValidation().err">{{e}}</li></ul> </span>
+
+            </div>
+          </div>
+          <!-- Text input-->
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="city">City</label>
+            <div class="col-md-8">
+              <input id="city" name="city" type="text" placeholder="City" value="Dhaka" readonly class="form-control input-md">
+            </div>
+          </div>
+
+
+
+          <!-- Button (Double) -->
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="save"></label>
+            <div class="col-md-8">
+              <button id="save" [disabled]="!isFormValid()" name="save" class="btn btn-success" type="submit">Create Account</button>
+            </div>
+          </div>
+
+        </fieldset>
+      </form>
+
+      <div *ngIf="!IsRegistration">
+
+        <h2>Congratulations {{user.name}} !</h2>
+        <h2>Your Account Has been created. </h2>
+        <h3> Please Login to your account. </h3> <h4> <a routerLink="/login">Click Here </a> </h4>
+        
+
+      </div>
+
+
+    </div>
+
+  </div>
+</div>

@@ -1,1 +1,7 @@
-/* You can add global styles to this file, and also import other style files */
+/*body{
+    background-image: url("../public/b (4).jpg");
+}*/
+
+footer.bs-footer {
+    text-align: center;
+}

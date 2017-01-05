@@ -1,0 +1,19 @@
+.modal-body{
+    padding: 50px;
+}
+
+select#accountType {
+    padding: 5px 70px 5px 70px;
+    text-align: center;
+    font-size: larger;
+    border-radius: 15px;
+    background-color: antiquewhite;
+}
+
+.ng-valid[required], .ng-valid.required  {
+  border-left: 5px solid #42A948; /* green */
+}
+
+.ng-invalid:not(form)  {
+  border-left: 5px solid #a94442; /* red */
+}
