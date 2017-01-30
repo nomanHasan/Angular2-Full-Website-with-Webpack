@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginUser } from '../models/login-user';
+import { User } from '../models/user';
 import { AuthService } from '../auth.service';
 import {Location} from '@angular/common';
 import {Router } from '@angular/router';
@@ -13,7 +13,7 @@ import {Router } from '@angular/router';
 
 export class LoginComponent implements OnInit {
   submitted = false;
-  model= new LoginUser("","");
+  model= new User("","");
   message= "LoginComponent";
 
   constructor(private authService: AuthService,

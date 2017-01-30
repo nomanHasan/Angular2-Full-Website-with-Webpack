@@ -59,7 +59,6 @@ export class TuitionCreatorComponent implements OnInit {
     // console.log(this.tuition.isLevelValid());
     // console.log(this.tuition.isInstitutionValid());
     
-
     return validity;
   }
 

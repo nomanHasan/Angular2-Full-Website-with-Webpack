@@ -23,20 +23,31 @@ export class AuthService {
     let body = urlSearchParams.toString();
 
     console.log(this.authUrl, body, headers);
+    
 
     return this.http.post(this.authUrl, body, {headers: headers})
     .toPromise()
     .then((response: Response)=>{
+      
       console.log(response);
        var body = response.json();
        if(body.success == true){
-          localStorage.setItem('username', body.payload.username );
-          localStorage.setItem("accountType", body.payload.accountType);
-          localStorage.setItem("name", body.payload.name);
-          localStorage.setItem("contactNo", body.payload.contactNo);
-          localStorage.setItem("location", JSON.stringify(body.payload.location));
-          localStorage.setItem("email", body.payload.email);
+          localStorage.setItem('username', body.user.username );
+          localStorage.setItem("accountType", body.user.accountType);
+          localStorage.setItem("name", body.user.name);
+          localStorage.setItem("contactNo", body.user.contactNo);
+          localStorage.setItem("location", JSON.stringify(body.user.location));
+          localStorage.setItem("email", body.user.email);
           localStorage.setItem("auth_token", body.token);
+          if(body.user.teacherInfo == null){
+            body.user.teacherInfo = {
+              institution: "",
+              level: "",
+              sex: "",
+              age: 0,
+            };
+          }
+          localStorage.setItem("teacherInfo", JSON.stringify(body.user.teacherInfo));
        }
        return body;
     })
@@ -90,11 +101,11 @@ export class AuthService {
     user.contactNo = localStorage.getItem("contactNo");
     user.accountType = localStorage.getItem("accountType");
     user.location = JSON.parse(localStorage.getItem("location"));
-
+    
+    user.teacherInfo = JSON.parse(localStorage.getItem("teacherInfo"));
+    
     console.log("GetUser called "+ user);
-    console.log(user);
-    
-    
+    console.log(user);    
     return user;
   }
 
@@ -106,6 +117,7 @@ logout() {
   localStorage.setItem("contactNo", "");
   localStorage.setItem("email", "");
   localStorage.setItem("location", "");
+  localStorage.setItem("teacherInfo", "");
 }
 
  private handleError(error: any) : Promise<any>{

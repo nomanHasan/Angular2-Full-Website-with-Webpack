@@ -29,7 +29,6 @@ export class PublicTuitionDetailsComponent implements OnInit {
   message: string;
   offer: number;
 
-
   ngOnInit() {
     this.route.params
     .switchMap((params: Params)=> this.tuitionService.getPublicTuitionById(params['id']))
@@ -42,7 +41,7 @@ export class PublicTuitionDetailsComponent implements OnInit {
   onSubmit(value: number, content){
     console.log(value);
     this.offer = value;
-    this.tuitionService.applyForTuition(value)
+    this.tuitionService.applyForTuition(this.tuition._id, value)
     .then(res=> {
       if(res.success){
 

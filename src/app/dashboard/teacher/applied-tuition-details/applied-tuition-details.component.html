@@ -1,3 +1,20 @@
 <p>
   applied-tuition-details works!
 </p>
+
+<div class="tuition-space" *ngIf="tuition">
+  <div class="tuition-info col-md-8">
+    <h3><label for="">Institution: </label> {{tuition.institution}}</h3>
+    <h4><label for="">Medium: </label> {{tuition.info.medium}}</h4>
+    <h5><label for="">Level: </label> {{tuition.info.level}}</h5>
+    <h5><label for="">Subjects: </label> {{tuition.subjects}}</h5>
+    <h5><label for="">Days: </label> {{tuition.days}}</h5>
+    <h5><label for="">Thana: </label> {{tuition.thana}}</h5>
+    <h5><label for="">Zone: </label> {{tuition.zone}}</h5>
+    <h5><label for="">Applied Salary: </label> {{tuition.sal}} Tk</h5>
+  </div>
+
+  <div class="col-md-8">
+    <button class="btn btn-danger" (click)="cancelApplication()">Cancel Application</button>
+  </div>
+</div>

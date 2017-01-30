@@ -2,12 +2,13 @@ export class User{
 
     constructor(
         public username: string,
-        public name: string,
         public password: string,
-        public accountType: string,
-        public contactNo: string,
-        public email: string) {}
+        ) {}
 
+    public name: string;
+    public accountType: string;
+    public contactNo: string;
+    public email: string;
     public id;
     public location: {
         district: string;

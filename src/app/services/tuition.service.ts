@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '../../http-client';
-import { PublicTuition } from './public-tuition';
+import { HttpClient } from '../http-client';
+import { Tuition } from '../models/tuition';
 import { Response, Headers, URLSearchParams } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
-export class PublicTuitionService {
+export class TuitionService {
 
   constructor(private http: HttpClient) { }
 
   
-  getPublicTuition(offset):Promise<PublicTuition[]>{
+  getPublicTuition(offset):Promise<Tuition[]>{
     let getURL = `api/jobs/public/${offset}`;
     
     return this.http.get(getURL)
@@ -20,12 +20,12 @@ export class PublicTuitionService {
       console.log("RES FROM SERVICE");
       
       console.log(res);
-      return res.json().jobs as PublicTuition[];
+      return res.json().jobs as Tuition[];
     })
     .catch(this.handleError);
   }
 
-  getPublicTuitionById(id):Promise<PublicTuition>{
+  getPublicTuitionById(id):Promise<Tuition>{
     console.log(id);
     
     let getURL = `api/jobs/public-detail/`+id;
@@ -34,7 +34,7 @@ export class PublicTuitionService {
     .toPromise()
     .then(res =>{
       console.log(res);
-      return res.json().job as PublicTuition;
+      return res.json().job as Tuition;
     })
     .catch(this.handleError);
   }
@@ -57,6 +57,48 @@ export class PublicTuitionService {
       return res.json();
     })
     .catch(this.handleError);          
+  }
+
+  getAppliedTuition(offset): Promise<Tuition[]>{
+    let getURL = `api/jobs/applied/${offset}`;
+    
+    return this.http.get(getURL)
+    .toPromise()
+    .then(res =>{
+      console.log("RES FROM SERVICE");
+      
+      console.log(res);
+      return res.json().jobs as Tuition[];
+    })
+    .catch(this.handleError);
+  }
+
+  getAppliedTuitionById(id):Promise<Tuition>{
+    console.log(id);
+    
+    let getURL = `api/jobs/applied-detail/`+id;
+    
+    return this.http.get(getURL)
+    .toPromise()
+    .then(res =>{
+      console.log(res);
+      return res.json().job as Tuition;
+    })
+    .catch(this.handleError);
+  }
+
+  cancelApplicationById(id):Promise<any>{
+    console.log(id);
+    
+    let getURL = `api/jobs/cancel-application/`+id;
+    
+    return this.http.get(getURL)
+    .toPromise()
+    .then(res =>{
+      console.log(res);
+      return res.json() ;
+    })
+    .catch(this.handleError);
   }
 
   private handleError(error: any): Promise<any> {

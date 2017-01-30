@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { PublicTuitionService } from '../public-tuition.service';
-import { PublicTuition } from '../public-tuition';
+import { TuitionService } from '../../../services/tuition.service';
+import { Tuition } from '../../../models/tuition';
 
 @Component({
   selector: 'app-tuition-finder',
@@ -11,17 +11,21 @@ import { PublicTuition } from '../public-tuition';
 export class TuitionFinderComponent implements OnInit {
 
   constructor(
-    private publicTuitionService: PublicTuitionService,
+    private publicTuitionService: TuitionService,
     private router: Router
   ) { }
 
-  tuitions: Array<PublicTuition>;
+  tuitions: Array<Tuition>;
 
   ngOnInit() {
     this.publicTuitionService.getPublicTuition(0)
     .then(res=>{
+      console.log("RES FROM PublicTuition");
+      
       console.log(res);
       this.tuitions = res;
+      console.log("RES + TUITION");
+      
       console.log(this.tuitions);
     });
   }
