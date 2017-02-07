@@ -23,7 +23,7 @@ import { NotForUserGuard } from './auth-guard';
 import { StudentGuard } from './student-guard';
 import { TeacherGuard } from './teacher-guard';
 
-import { UserService } from './user.service';
+import { UserService } from './services/user.service';
 import { TuitionService } from './services/tuition.service';
 import {PublicTuitionService } from './dashboard/teacher/public-tuition.service';
 import {PrivateTuitionService} from './dashboard/student/private-tuition.service';

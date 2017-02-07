@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Headers, Http, URLSearchParams, Response } from '@angular/http';
-import { User } from './user';
+import { User } from './models/user';
 
 import 'rxjs/add/operator/toPromise';
 
@@ -94,7 +94,7 @@ export class AuthService {
   }
 
   getUser(){
-    var user = new User("","","","","","");
+    var user = new User("","");
     user.username = localStorage.getItem("username");
     user.name = localStorage.getItem("name");
     user.email = localStorage.getItem("email");

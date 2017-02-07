@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { UserService } from '../user.service';
-import { User } from '../user';
+import { UserService } from '../services/user.service';
+import { User } from '../models/user';
 
 
 @Component({
@@ -12,7 +12,7 @@ import { User } from '../user';
 export class RegisterComponent implements OnInit {
   accountTypes = ["Teacher", "Guardian/Student"];
 
-  user = new User("","","","","","");
+  user = new User("","");
   IsRegistration = true;
 
   usernameStatus: any;
@@ -60,6 +60,10 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.IsRegistration);
+    this.user.name = "";
+    this.user.contactNo = "";
+    this.user.email = "";
+    this.user.username = "";
   }
   onSubmit() {
     console.log("onSubmit Called ");
@@ -82,6 +86,8 @@ export class RegisterComponent implements OnInit {
     if(this.user.name==""){
       return {stat:false };
     }
+    console.log(this.user.isNameValid());
+    
     return this.user.isNameValid();
   }
   usernameValidation(){

@@ -36,7 +36,10 @@ export class PublicTuitionDetailsComponent implements OnInit {
       console.log(tuition);
       this.tuition = tuition 
     });
+
   }
+
+
 
   onSubmit(value: number, content){
     console.log(value);

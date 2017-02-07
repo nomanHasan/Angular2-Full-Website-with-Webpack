@@ -64,12 +64,20 @@ export class User{
             err.push("Institution must be present ");
             stat = false;
         }
+        if(this.isMobileNo(this.teacherInfo.institution)){
+            err.push("Institution Cannot containt Mobile Number");
+            stat = false;
+        }
         if(this.teacherInfo.level.length <=0){
             err.push("Level must be present ");
             stat = false;
         }
-        if(this.teacherInfo.sex.length <=0){
-            err.push("Sex must be present ");
+        if(this.isMobileNo(this.teacherInfo.level)){
+            err.push("Level cannot contain Mobile Number");
+            stat = false;
+        }
+        if(this.teacherInfo.sex !="male" && this.teacherInfo.sex!="female"){
+            err.push("Sex must be selected.");
             stat = false;
         }
         if(this.teacherInfo.age <10){
@@ -83,6 +91,15 @@ export class User{
         return {stat, err};
     }
 
+    isMobileNo(source: string) {
+        var re = /01[356789]\d{8}/;
+        var arr = re.exec(source);
+        if (arr) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     isNameValid(){
         var err=[];
@@ -110,6 +127,8 @@ export class User{
             err.push("Name can only contain Letters and Dot(.).");
             stat = false;
         }
+        console.log("IsName Valiud");
+        console.log(err);       
 
         return {stat, err};
     }

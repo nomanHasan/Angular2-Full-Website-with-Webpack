@@ -82,7 +82,4 @@ export class PrivateTuition {
 
         return { stat, err };
     }
-
-
-
 }

@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, URLSearchParams } from '@angular/http';
-import {User } from './user';
-import { HttpClient} from './http-client';
+import {User } from '../models/user';
+import { HttpClient} from '../http-client';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
-export class UsrService {
+export class UserService {
 
   constructor(private http: Http, private authHttp: HttpClient) { }
 
@@ -64,6 +64,34 @@ export class UsrService {
       if(res.json().success){
         
         localStorage.setItem("location", JSON.stringify(res.json().location));
+      }
+      return res.json();
+    })
+    .catch(this.handleError);
+  }
+
+  updateTeacherInfo(teacherInfo: any): Promise<any>{
+    var updateAddressUrl = "api/accounts/teacherinfo";
+    console.log(teacherInfo);
+    
+    let urlSearchParams = new URLSearchParams();
+    urlSearchParams.append("institution", teacherInfo.institution);
+    urlSearchParams.append("level", teacherInfo.level);
+    urlSearchParams.append("sex", teacherInfo.sex);
+    urlSearchParams.append("age", teacherInfo.age);
+
+    let body = urlSearchParams.toString();
+
+    console.log(body);
+    
+    return this.authHttp.post(updateAddressUrl, body )
+    .toPromise()
+    .then(res=>{
+
+      console.log(res.json());
+      if(res.json().success){
+        
+        localStorage.setItem("teacherInfo", JSON.stringify(res.json().teacherInfo));
       }
       return res.json();
     })

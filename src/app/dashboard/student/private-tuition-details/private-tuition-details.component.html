@@ -1,7 +1,53 @@
-<div *ngIf="tuition">
-  <h3><label for="">Institution: </label> {{tuition.institution}}</h3>
-  <h3><label for="">Medium: </label> {{tuition.info.medium}}</h3>
-  <h3><label for="">Level: </label> {{tuition.info.level}}</h3>
-  <h3><label for="">Subjects: </label> {{tuition.subjects}}</h3>
-  <h3><label for="">Days: </label> {{tuition.days}}</h3>
+<div *ngIf="tuition" class="col-sm-4">
+  <h4><label for="">Institution: </label> {{tuition.institution}}</h4>
+  <h4><label for="">Medium: </label> {{tuition.info.medium}}</h4>
+  <h5><label for="">Level: </label> {{tuition.info.level}}</h5>
+  <h5><label for="">Subjects: </label> {{tuition.subjects}}</h5>
+  <h5><label for="">Days: </label> {{tuition.days}}</h5>
+  
+</div>
+<div class="col-sm-8">
+      <table class="table">
+        <tbody>
+          <tr *ngFor="let el of selectedElements; let i=index">
+            <td *ngIf="i==0">First Choice</td>
+            <td *ngIf="i>=1">Second Choice</td>
+            <td>{{el.applicant.teacherInfo.institution}}</td>
+            <td>{{el.applicant.teacherInfo.level}}</td>
+            <td>{{el.applicant.teacherInfo.sex}}</td>
+            <td>{{el.applicant.teacherInfo.age}}</td>
+            <td>{{el.salary}}</td>
+            <td><button class="btn btn-danger" (click)="remove(el.applicant._id)"><span class="glyphicon glyphicon-remove"></span></button></td>
+          </tr>
+        </tbody>
+      </table>
+      <button *ngIf=" selectedElements && selectedElements.length >0 " class="btn btn-success" (click)="submit()">Submit Selection</button>
+  </div>
+<div class="col-sm-8">
+<table class="table">
+  <thead>
+    <tr>
+      <th>Institution</th>
+      <th>Level</th>
+      <th>Sex</th>
+      <th>Age</th>
+      <th>Salary</th>
+      <th>Options</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let el of elements">
+      <td>{{el.applicant.teacherInfo.institution}}</td>
+      <td>{{el.applicant.teacherInfo.level}}</td>
+      <td>{{el.applicant.teacherInfo.sex}}</td>
+      <td>{{el.applicant.teacherInfo.age}}</td>
+      <td>{{el.salary}}</td>
+      <td>
+        <button name="rank" id="rank" class="btn btn-success" (click)="select(el.applicant._id)">
+          <span class="glyphicon glyphicon-ok"></span>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
 </div>

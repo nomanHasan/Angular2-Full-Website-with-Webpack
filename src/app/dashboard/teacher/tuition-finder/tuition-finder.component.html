@@ -1,7 +1,60 @@
-<h2>Tuition Finder </h2>
+<div *ngIf="!isTeacherInfoValid">
+    <form class="form-horizontal">
+        <fieldset>
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="Institution">Institution</label>
+                <div class="col-md-4">
+                    <input #name="ngModel" name="Institution" type="text" placeholder="Institution" [(ngModel)]="user.teacherInfo.institution" class="form-control input-md"
+                        required="Institution Name is required ">
+                    <span class="help-block">Institution Name</span>
+                </div>
+            </div>
 
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="city">Level</label>
+                <div class="col-md-4">
+                    <input id="Level" name="Level" type="text" [(ngModel)]="user.teacherInfo.level" placeholder="Level" class="form-control input-md">
+                    <span class="help-block"> Enter Level </span>
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="thana">Sex</label>
+                <div class="col-md-4">
+                    <select id="Sex" name="Sex" type="text" [(ngModel)]="user.teacherInfo.sex" class="form-control input-md">
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="zone">Age</label>
+                <div class="col-md-4">
+                    <input id="Age" name="Age" type="number" [(ngModel)]="user.teacherInfo.age" placeholder="Age" class="form-control input-md"/>
+                </div>
+            </div>
+
+            <!-- Button (Double) -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="save"></label>
+                <div class="col-md-8">
+                    <button id="save" [disabled]="!user.isTeacherInfoValid().stat" name="save" (click)="onSubmit()" class="btn btn-success" type="submit">Update Teacher Info</button>
+                </div>
+            </div>
+
+            <div>
+                <label class="label label-danger">{{user.isTeacherInfoValid().err}}</label>
+            </div>
+
+        </fieldset>
+    </form>
+</div>
+<div *ngIf="isTeacherInfoValid">
 <div *ngFor="let t of tuitions" class="panel panel-default">
-    <a [routerLink]="[ '/dashboard/tuition-details', t._id ]" >
+    <a [routerLink]="[ '/dashboard/tuition-details', t._id ]">
         <div class="panel-body">
             <h4 class="institution">{{t.institution}}</h4><br>
             <div class="left">
@@ -16,4 +69,5 @@
             </div>
         </div>
     </a>
+</div>
 </div>
