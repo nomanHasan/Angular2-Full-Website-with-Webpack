@@ -85,7 +85,7 @@ export class AuthService {
       this.accountType = localStorage.getItem("accountType");
       if(this.accountType != null){
         if(this.accountType.length != 0){
-          if(this.accountType == "Guardian/Student"){
+          if(this.accountType == "Student"){
             return true;
           }else return false;
         }else return false;
@@ -100,9 +100,12 @@ export class AuthService {
     user.email = localStorage.getItem("email");
     user.contactNo = localStorage.getItem("contactNo");
     user.accountType = localStorage.getItem("accountType");
-    user.location = JSON.parse(localStorage.getItem("location"));
-    
-    user.teacherInfo = JSON.parse(localStorage.getItem("teacherInfo"));
+    if(localStorage.getItem("location")){
+      user.location = JSON.parse(localStorage.getItem("location"));
+    }
+    if(localStorage.getItem("teacherInfo")){
+      user.teacherInfo = JSON.parse(localStorage.getItem("teacherInfo"));
+    }
     
     console.log("GetUser called "+ user);
     console.log(user);    

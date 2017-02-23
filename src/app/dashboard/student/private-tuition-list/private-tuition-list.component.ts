@@ -22,6 +22,8 @@ export class PrivateTuitionListComponent implements OnInit {
       console.log(res);
       
       this.tuitions = res;
+      console.log("Getting PRICATE Tuition List");
+      
       console.log(this.tuitions);
       
     });

@@ -20,6 +20,11 @@ export class AppComponent implements OnInit{
   ngOnInit(){
     this.user = this.authService.getUser();
   }
+  
+  validUser(){
+    this.user = this.authService.getUser();
+    return this.user.usernameExists();
+  }
 
   onLogout() {
     this.authService.logout();

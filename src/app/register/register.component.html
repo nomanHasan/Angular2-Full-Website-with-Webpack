@@ -41,12 +41,12 @@
             </div>
           </div>
 
-          <div *ngIf="usernameStatus">
+          <!--<div *ngIf="usernameStatus">
             <label class="lbl lbl-danger">{{usernameStatus.username}} exists{{usernameStatus.exists}} </label>
-          </div>
-          <div *ngIf="user">
+          </div>-->
+          <!--<div *ngIf="user">
             <label class="lbl lbl-danger">{{user.name}} {{user.username}}  {{user.contactNo}}  {{user.email}} {{user.password}} {{user.accountType}}</label>
-          </div>
+          </div>-->
 
           <!-- Text input-->
           <div class="form-group">
@@ -55,7 +55,6 @@
               <input id="email" name="email" type="text" placeholder="Email address" [(ngModel)]="user.email" class="form-control input-md">
               <span class="help-block">Email will be used for notication messages</span>
               <span *ngIf="!emailValidation().stat"> <ul><li style="color:red" *ngFor="let e of emailValidation().err">{{e}}</li></ul></span>
-
             </div>
           </div>
 
@@ -75,9 +74,10 @@
           <div class="form-group">
             <label class="col-md-4 control-label" for="rpassword">Confirm Password</label>
             <div class="col-md-8">
-              <input id="rpassword" name="rpassword" type="password" [(ngModel)]="user.password" placeholder="Password" class="form-control input-md"
+              <input id="rpassword" name="rpassword" type="password" [(ngModel)]="user.rPassword" placeholder="Repeat Password" class="form-control input-md"
                 required="">
-              <span class="help-block">Retype pass word</span>
+              <span class="help-block">Retype Password</span>
+              <span *ngIf="!rPasswordValidation().stat"><ul><li style="color:red" *ngFor="let e of rPasswordValidation().err">{{e}}</li></ul> </span>
             </div>
           </div>
 
@@ -86,7 +86,7 @@
             <label class="col-md-4 control-label" for="accountType">Account Type </label>
             <div class="col-md-8">
               <select id="accountType" name="accountType" [(ngModel)]="user.accountType">
-                <option *ngFor="let at of accountTypes " value="{{at}}">{{at}}</option>
+                <option *ngFor="let at of accountTypes " value="{{at.value}}">{{at.name}}</option>
               </select>
               <span *ngIf="!accountTypeValidation().stat"> <ul><li style="color:red" *ngFor="let e of accountTypeValidation().err">{{e}}</li></ul> </span>
 

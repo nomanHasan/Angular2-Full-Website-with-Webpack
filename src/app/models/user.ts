@@ -4,7 +4,7 @@ export class User{
         public username: string,
         public password: string,
         ) {}
-
+    public rPassword: string;
     public name: string;
     public accountType: string;
     public contactNo: string;
@@ -161,6 +161,19 @@ export class User{
         return {stat, err};
     }
 
+    usernameExists(){
+        console.log("USERNAME EXIST CALLED");
+        if(this.username && this.username.length > 0){
+            console.log(this.username);
+            
+            return true;
+        }else{
+            console.log("FALSE");
+
+            return false;
+        }
+    }
+
     isPasswordValid(){
         var err=[];
         var stat= true;
@@ -182,11 +195,21 @@ export class User{
         return {stat, err};
     }
 
+    isrPasswordValid(){
+        var err=[];
+        var stat= true;
+        if(this.password != this.rPassword){
+            err.push("Password does not match.");
+            stat = false;
+        }
+        return {stat, err};
+    }
+
     isAccountTypeValid(){
         var err=[];
         var stat= true;
 
-        if( ["Teacher", "Guardian/Student"].indexOf(this.accountType) < 0 ){
+        if( ["Teacher", "Student"].indexOf(this.accountType) < 0 ){
             stat = false;
             err.push("Account Type must be one of Teacher and Guardian/Student");
         }

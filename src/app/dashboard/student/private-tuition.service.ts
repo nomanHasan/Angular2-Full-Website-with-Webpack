@@ -40,7 +40,7 @@ export class PrivateTuitionService {
     .toPromise()
     .then(res =>{
       console.log(res);
-      return res.json().jobs.docs as PrivateTuition[];
+      return res.json().jobs as PrivateTuition[];
     })
     .catch(this.handleError);
   }

@@ -6,7 +6,7 @@
   <h5><label for="">Days: </label> {{tuition.days}}</h5>
   
 </div>
-<div class="col-sm-8">
+<div class="col-sm-8" *ngIf="selectedElements && selectedElements.length > 0">
       <table class="table">
         <tbody>
           <tr *ngFor="let el of selectedElements; let i=index">
@@ -23,7 +23,7 @@
       </table>
       <button *ngIf=" selectedElements && selectedElements.length >0 " class="btn btn-success" (click)="submit()">Submit Selection</button>
   </div>
-<div class="col-sm-8">
+<div class="col-sm-8" *ngIf="elements && elements.length > 0">
 <table class="table">
   <thead>
     <tr>

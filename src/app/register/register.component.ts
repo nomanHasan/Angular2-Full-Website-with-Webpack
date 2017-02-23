@@ -10,7 +10,7 @@ import { User } from '../models/user';
 })
 
 export class RegisterComponent implements OnInit {
-  accountTypes = ["Teacher", "Guardian/Student"];
+  accountTypes = [{name: "Teacher", value: "Teacher"}, {name: "Guardian/Student", value: "Student"}];
 
   user = new User("","");
   IsRegistration = true;
@@ -117,8 +117,16 @@ export class RegisterComponent implements OnInit {
     }
     return this.user.isPasswordValid();
   }
+
+  rPasswordValidation(){    
+    if(this.user.rPassword ===undefined || this.user.rPassword == ""){
+      return {stat: false };
+    }
+    return this.user.isrPasswordValid();
+  }
+
   accountTypeValidation(){
-    if(this.user.accountType==""){
+    if(this.user.accountType=== undefined){
       return { stat: false };
     }
     return this.user.isAccountTypeValid();
