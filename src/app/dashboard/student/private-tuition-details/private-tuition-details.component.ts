@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { TuitionService } from '../../../services/tuition.service';
 import { Tuition, Element, Applicant, TeacherInfo } from '../../../models/tuition';
-import {ActivatedRoute, Params } from '@angular/router';
+import {Router, ActivatedRoute, Params } from '@angular/router';
+
+
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+
 
 import 'rxjs/add/operator/switchMap';
 
@@ -13,7 +17,9 @@ import 'rxjs/add/operator/switchMap';
 export class PrivateTuitionDetailsComponent implements OnInit {
 
   constructor(private tuitionService: TuitionService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router,
+    private modalService: NgbModal
   ) { }
 
   tuition: Tuition ;
@@ -21,6 +27,7 @@ export class PrivateTuitionDetailsComponent implements OnInit {
   selectedElements: Array<Element>;
   applicant: Applicant;
   teacherInfo: TeacherInfo;
+  message: string;
 
   ngOnInit() {
     this.route.params
@@ -70,7 +77,7 @@ export class PrivateTuitionDetailsComponent implements OnInit {
     }   
   }
 
-  submit(){
+  submit(content){
     var tuitionIds = [];
 
     for(var i =0; i< this.selectedElements.length; i++){
@@ -79,7 +86,23 @@ export class PrivateTuitionDetailsComponent implements OnInit {
     console.log(tuitionIds);
 
     this.tuitionService.selectApplicatoin(tuitionIds, this.tuition._id).then(res =>{
-      console.log(res);    
+      if(res.success){
+
+        this.message = "Uploaded Selected Teachers";
+        this.modalService.open(content).result.then((result)=>{
+          this.router.navigate(['/dashboard/my-tuition']);
+        });
+      }else{
+
+      }
     }).catch((err=> console.log(err)));
+  }
+
+
+  open(content) {
+    this.modalService.open(content).result.then((result) => {
+    }, (reason) => {
+
+    });
   }
 }
