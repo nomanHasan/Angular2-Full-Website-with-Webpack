@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PublicTuitionService } from '../public-tuition.service';
 import { PublicTuition } from '../public-tuition';
 import { ActivatedRoute, Router, Params } from '@angular/router';
-import { User } from '../../../user';
+import { User } from '../../../models/user';
 import { AuthService } from '../../../auth.service';
 
 
